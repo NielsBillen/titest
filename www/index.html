@@ -33,7 +33,7 @@
 	<script src="ti-sensortag.js"></script>
 </head>
 <body>
-	<h1>TI SensorTag v0.2</h1>
+	<h1>TI SensorTag</h1>
 
 	<div class="SensorData">Status: <span id="StatusData">Ready to connect</span></div>
 	<div class="SensorData">Keypress: <span id="KeypressData">[Waiting for value]</span></div>
@@ -44,9 +44,6 @@
 	<div class="SensorData">Barometer:<br/><span id="BarometerData">[Waiting for value]</span></div>
 	<div class="SensorData">Gyroscope:<br/><span id="GyroscopeData">[Waiting for value]</span></div>
 
-	<div id = "console">
-	</div>
-	
 	<script>
 	// SensorTag object.
 	var sensorTag = TISensorTag.createInstance()
@@ -160,23 +157,7 @@
 		document.getElementById(elementId).innerHTML = value
 	}
 
-	setTimeout(function() {
-		initialiseSensortag();
-	}, 1000);
-	
-	(function() {
-		if (typeof console  != "undefined") 
-		if (typeof console.log != 'undefined')
-			console.olog = console.log;
-		else
-			console.olog = function() {};
-
-		console.log = function(message) {
-			console.olog(message);
-			document.getElementById("console").append('<p>' + message + '</p>');
-		};
-		console.error = console.debug = console.info =  console.log
-	}());
+	document.addEventListener('deviceready', initialiseSensortag, false)
 	</script>
 </body>
 </html>
